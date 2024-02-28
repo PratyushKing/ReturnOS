@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "TS4ffaeVn4V7nOfyqUP1Oru4shYMi3gzDQ7Yf2OGw9QCwyb3OSOlvbcNlH/+xI/F6KvotYAQtU3CQnCodk7h3Q==",
+  "success": true,
+  "projectFilePath": "/home/pratyush/Documents/ReturnOS/ReturnOS.csproj",
+  "expectedPackageFiles": [
+    "/home/pratyush/.nuget/packages/cosmos.build/0.1.0-localbuild/cosmos.build.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/cosmos.common/0.1.0-localbuild/cosmos.common.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/cosmos.core/0.1.0-localbuild/cosmos.core.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/cosmos.debug.kernel/0.1.0-localbuild/cosmos.debug.kernel.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/cosmos.hal2/0.1.0-localbuild/cosmos.hal2.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/cosmos.plugs/0.1.0-localbuild/cosmos.plugs.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/cosmos.system2/0.1.0-localbuild/cosmos.system2.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/il2cpu.api/0.1.0-localbuild/il2cpu.api.0.1.0-localbuild.nupkg.sha512",
+    "/home/pratyush/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.26/microsoft.aspnetcore.app.ref.6.0.26.nupkg.sha512"
+  ],
+  "logs": []
+}

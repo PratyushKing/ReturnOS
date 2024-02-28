@@ -1,0 +1,98 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/pratyush/Documents/ReturnOS/ReturnOS.csproj": {}
+  },
+  "projects": {
+    "/home/pratyush/Documents/ReturnOS/ReturnOS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pratyush/Documents/ReturnOS/ReturnOS.csproj",
+        "projectName": "ReturnOS",
+        "projectPath": "/home/pratyush/Documents/ReturnOS/ReturnOS.csproj",
+        "packagesPath": "/home/pratyush/.nuget/packages/",
+        "outputPath": "/home/pratyush/Documents/ReturnOS/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pratyush/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "/opt/cosmos/Packages/": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Cosmos.Build": {
+              "target": "Package",
+              "version": "[0.0.0-*, )",
+              "noWarn": [
+                "NU1604"
+              ]
+            },
+            "Cosmos.Debug.Kernel": {
+              "target": "Package",
+              "version": "[0.0.0-*, )",
+              "noWarn": [
+                "NU1604"
+              ]
+            },
+            "Cosmos.Plugs": {
+              "target": "Package",
+              "version": "[0.0.0-*, )",
+              "noWarn": [
+                "NU1604"
+              ]
+            },
+            "Cosmos.System2": {
+              "target": "Package",
+              "version": "[0.0.0-*, )",
+              "noWarn": [
+                "NU1604"
+              ]
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.26, 6.0.26]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.115/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

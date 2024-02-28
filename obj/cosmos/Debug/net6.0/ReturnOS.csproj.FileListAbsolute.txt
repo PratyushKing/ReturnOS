@@ -1,0 +1,12 @@
+/home/pratyush/Documents/ReturnOS/bin/cosmos/Debug/net6.0/ReturnOS.deps.json
+/home/pratyush/Documents/ReturnOS/bin/cosmos/Debug/net6.0/ReturnOS.dll
+/home/pratyush/Documents/ReturnOS/bin/cosmos/Debug/net6.0/ReturnOS.pdb
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.csproj.AssemblyReference.cache
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.GeneratedMSBuildEditorConfig.editorconfig
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.AssemblyInfoInputs.cache
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.AssemblyInfo.cs
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.csproj.CoreCompileInputs.cache
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.dll
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/refint/ReturnOS.dll
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ReturnOS.pdb
+/home/pratyush/Documents/ReturnOS/obj/cosmos/Debug/net6.0/ref/ReturnOS.dll
