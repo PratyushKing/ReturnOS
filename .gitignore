@@ -1,5 +1,6 @@
-bin/
-ISO/
+/ReturnOS/bin/
+/ReturnOS/ISO/
+/ReturnOS/obj/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
