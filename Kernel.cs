@@ -10,7 +10,7 @@ namespace ReturnOS
     public class Kernel: Sys.Kernel
     {
         public static CosmosVFS fs;
-        public static LVFS fallbackFS;
+       // public static LVFS fallbackFS;
 
         protected override void BeforeRun()
         {
@@ -32,12 +32,10 @@ namespace ReturnOS
                 ConsoleLib.WriteSystemInfo(Result.WARN, "Please note: the system is on fallback mode and will use a LVFS to load filesystem actions!");
             }
             ConsoleLib.WriteSystemInfo(Result.OK, "Starting system service manager.");
-            var output = 
         }
         
         protected override void Run()
         {
-            Console.WriteLine();
         }
     }
 }

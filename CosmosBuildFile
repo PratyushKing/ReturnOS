@@ -1,6 +1,6 @@
 [ReturnOS]
 cosmosProjectFile = ReturnOS.csproj
-cliBuildVersion = v1.0
+cliBuildVersion = v1.3
 buildLocation = ISO/
 buildISOName = ReturnOS
-runCommand = qemu-system-x86_64 -cdrom __ISO__ -m 512M
+runProfile = VMWare
