@@ -6,6 +6,8 @@ using System.Text;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
 using Cosmos.System.Graphics;
+using IL2CPU.API.Attribs;
+using ReturnOS.Graphical;
 using ReturnOS.SystemCore;
 using Sys = Cosmos.System;
 
@@ -20,6 +22,12 @@ namespace ReturnOS
         public static string kernelCurrentDir;
         public static bool bootIntoSetup;
         public static SVGAIICanvas canvas;
+
+        [ManifestResourceStream(ResourceName = "ReturnOS.Resources.back.bmp")] public static byte[] background_raw;
+        public static Bitmap background = new Bitmap(background_raw);
+
+        [ManifestResourceStream(ResourceName = "ReturnOS.Resources.cursor.bmp")] public static byte[] cursor_raw;
+        public static Bitmap cursor = new Bitmap(cursor_raw);
 
         public static Dictionary<string, string> variables = new Dictionary<string, string>() {
             { "SHELL", "[$USER@$HOSTNAME] ($CDIR) $USERSIGN" },
@@ -67,26 +75,30 @@ namespace ReturnOS
             ConsoleLib.WriteSystemInfo(Result.OK, "Starting system service manager.");
             ProcMgr.StartProcManager();
             ConsoleLib.WriteSystemInfo(Result.OK, "Checking for current installation");
-            if (!Directory.Exists("0:\\etc")) {
+            if (!File.Exists("0:\\etc\\installed")) {
                 ConsoleLib.WriteSystemInfo(Result.OK, "Launching ReturnOS Setup GUI");
                 bootIntoSetup = true;
             } else {
                 bootIntoSetup = false;
             }
             ConsoleLib.WriteSystemInfo(Result.OK, "Starting GUI Canvas");
-            canvas = new(new(1024, 768, ColorDepth.ColorDepth32));
-            Sys.MouseManager.ScreenWidth = 1024;
+            canvas = new(new(1360, 768, ColorDepth.ColorDepth32));
+            Sys.MouseManager.ScreenWidth = 1360;
             Sys.MouseManager.ScreenHeight = 768;
-            Sys.MouseManager.X = 1024 / 2;
+            Sys.MouseManager.X = 1360 / 2;
             Sys.MouseManager.Y = 768 / 2;
+            ConsoleLib.WriteSystemInfo(Result.OK, "Loading Welcome window!");
+            WindowManager.NewWindow(0, "Welcome to ReturnOS!", false, 1360 / 2 - 250, 768 / 2 - 125, 500, 250, WindowState.Active, new List<Widget>());
         }
         
         protected override void Run()
         {
-            canvas.Clear(Color.DarkViolet);
-            if (bootIntoSetup)
+            canvas.DrawImage(background, 0, 0);
+            if (!bootIntoSetup)
                 SetupMgr.Setup(isUsingLVFS);
 
+            WindowManager.Update();
+            canvas.DrawImageAlpha(cursor, (int)Sys.MouseManager.X, (int)Sys.MouseManager.Y);
             canvas.Display();
         }
 
