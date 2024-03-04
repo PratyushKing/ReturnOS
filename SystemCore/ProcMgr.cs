@@ -6,6 +6,9 @@ namespace ReturnOS.SystemCore;
 public static class ProcMgr {
     public static List<Process> procList;
 
+    public static void StartProcManager() {
+        
+    }
 }
 
 public class Process {

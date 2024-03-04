@@ -11,8 +11,8 @@ namespace ReturnOS.SystemCore {
             {"test", "test"}
         };
 
-        public static void RegisterLVFS(LVFS lvfs) {
-
+        public static LVFSHandler RegisterLVFS(LVFS lvfs) {
+            return new();
         }
     }
 
@@ -23,10 +23,7 @@ namespace ReturnOS.SystemCore {
         /// Writes all text of a file in a path with data. Path is path+file+extension.
         /// </summary>
         public static void WriteAllText(string path, string data) {
-            string[] cPath = path.Split('/');
-            foreach (var cp in cPath) {
-                
-            }
+            
         }
     }
 

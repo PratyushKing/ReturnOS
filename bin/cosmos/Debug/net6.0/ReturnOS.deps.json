@@ -120,56 +120,56 @@
     "Cosmos.Build/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BM/EUvzU45EIbRgnYQIZuCXQSZOHfv0UHEs/iDpnrLkzJxBRNjWs925qs0Ii4m7e77l53MjmLo19JztRJCv4OQ==",
+      "sha512": "sha512-oDg4QhoEdp6fQymTPLEhbjOFgHjP/ZV7ecV5QW+nYAcNr1MO7nYkEm8NRtP29s3ntfZvT8F1Wd+hB9KqPoxMWw==",
       "path": "cosmos.build/0.1.0-localbuild",
       "hashPath": "cosmos.build.0.1.0-localbuild.nupkg.sha512"
     },
     "Cosmos.Common/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BXGhl3MVin6cyI/clOkMIKRW8kW9rGnJG7hKLDnK7QpfVv//NBJeEND9GxjlArWy31h/HR2UjEznoHVT/JXkGA==",
+      "sha512": "sha512-s+9YjPv3zMcAkSpTU4fVPrnqQMAzVMe4KL0Y7KKLwE4qXwhf6149t/CWNNhrCiONOzf8gmMk1jN04G+hZUQ2FA==",
       "path": "cosmos.common/0.1.0-localbuild",
       "hashPath": "cosmos.common.0.1.0-localbuild.nupkg.sha512"
     },
     "Cosmos.Core/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wFzix8QNyQ5XhDLN/eXuhKYUIRCn2ABvB8maUWZSqJfPlX5b06+YiK0ysPf0KSw1QcP4cLHSYoFbqvOt2Vz3Vw==",
+      "sha512": "sha512-eqbprw3kHkLasKqHqvFNSn8x/NLmghcACykdXQuvcy48EZlu/SbSSgHdrljOi4QeZvF3APZ7t9SUcotdK90Pew==",
       "path": "cosmos.core/0.1.0-localbuild",
       "hashPath": "cosmos.core.0.1.0-localbuild.nupkg.sha512"
     },
     "Cosmos.Debug.Kernel/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-No7H2Myq2Qz9Ke28IcbGvON5pgZyXX8T+qz6BzZJu2AGgRmi/znoIcFOvjv+HJayQMFbuCdG7lg7e7Tam2yRZA==",
+      "sha512": "sha512-IiEMDuAbMIrskgEuldYmsYc07Dqz4YeYepWkdsciLeUjCWeSEOXiwyGUQ91I8wI6N2yxVvK1OO+htP6ro4EFWw==",
       "path": "cosmos.debug.kernel/0.1.0-localbuild",
       "hashPath": "cosmos.debug.kernel.0.1.0-localbuild.nupkg.sha512"
     },
     "Cosmos.HAL2/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-g7eR6yWJ3aeZC31meZ3UPjwBXQmlfoEEucAxPBHAAFtiC/UJuV07S0cqzMuOXgDSuuqfAhxizlBzrFHsCqUfZw==",
+      "sha512": "sha512-60xcOiRNs+EeuCLwTmBxFx6QTPTe7qfHYzzghnDUOaGNO2PDgAf8kSXEDTXYegSby9kuIFDeRoHcPbdAq/XO+w==",
       "path": "cosmos.hal2/0.1.0-localbuild",
       "hashPath": "cosmos.hal2.0.1.0-localbuild.nupkg.sha512"
     },
     "Cosmos.Plugs/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-T/pPjdAt1FL0ezOWtdIVxJdN4KDwsj2lURQNNqS0zOcItu5wJyu8uTapgotU3vzCi3eHkY/ZTxILGFSoY6FgAg==",
+      "sha512": "sha512-JsFAnJVeYX/C78t94os0Yr3/+t3rWpLxp83y2m7pqv8z1R6UKsXnW1yjIm+KtyUT7TJFYHuvohvPSWeSL9BoEw==",
       "path": "cosmos.plugs/0.1.0-localbuild",
       "hashPath": "cosmos.plugs.0.1.0-localbuild.nupkg.sha512"
     },
     "Cosmos.System2/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-D2uAviRyC2yB2KXf0yDII19rz+qEgehrSlAuJ+Du9E8bxcOP+wMfPJuux4dnvci7JKeDGwp4URUEh5cjHdYazQ==",
+      "sha512": "sha512-FiGgXsZ4cGcI5jQx35WrWDKGfGtOdyhjchlq2oMBJEBldx9O0PZepSsuHjtEpU1mWAntjxbv7W8a2dTD2V4shQ==",
       "path": "cosmos.system2/0.1.0-localbuild",
       "hashPath": "cosmos.system2.0.1.0-localbuild.nupkg.sha512"
     },
     "IL2CPU.API/0.1.0-localbuild": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WeLKV+1beJfVsmrQUMb9TxzkCpR6vATR8V0ZR1pAuKuZRYn0VK9Yi5O4tOSJ9rKsJfAsXEztfbenqD5TWK6WFw==",
+      "sha512": "sha512-byCwP9E0xUs9VYrq09hv85nIUg48GW22cC5yebgRaLgdX75d0k1X84nqLejdRdnbVn1UUz4V12Gpl4BDg02KXA==",
       "path": "il2cpu.api/0.1.0-localbuild",
       "hashPath": "il2cpu.api.0.1.0-localbuild.nupkg.sha512"
     }

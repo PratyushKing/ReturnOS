@@ -1,6 +1,6 @@
 [ReturnOS]
 cosmosProjectFile = ReturnOS.csproj
-cliBuildVersion = v1.3
+cliBuildVersion = v1.3.1
 buildLocation = ISO/
 buildISOName = ReturnOS
 runProfile = VMWare
