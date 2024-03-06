@@ -14,99 +14,62 @@ namespace ReturnOS.Graphical
     public static class WindowManager
     {
 
-        public static List<Window> openedWindows;
-        public static List<Window> minimizedWindows;
-        public static Window activeWindow;
+        public static List<Window> windowsList = new();
+        public static Window activeWindow = new();
+        public static int currentID = 0;
 
         public static void DrawAll()
         {
-            if (openedWindows.Count == 0)
+            if (windowsList.Count == 0)
                 return;
-            else if (openedWindows.Count == 1)
+            else if (windowsList.Count == 1)
                 goto activeWin;
 
-            foreach (var window in openedWindows)
+            foreach (var window in windowsList)
             {
-                Kernel.canvas.DrawFilledRectangle(Color.FromArgb(23, 23, 23), window.x, window.y, window.width, window.height);
-                Kernel.canvas.DrawFilledRectangle(Color.DarkGray, window.x, window.y, window.width, 20);
-                Kernel.canvas.DrawFilledCircle(Color.Red, window.x + window.width - 10, window.y + 10, 10);
+                if (activeWindow.id == window.id)
+                {
+                    continue;
+                }
+                Kernel.canvas.DrawFilledRectangle(Kernel.primaryPalette.Base, window.x, window.y, window.width, window.height);
+                Kernel.canvas.DrawFilledRectangle(Kernel.primaryPalette.Inactive, window.x, window.y, window.width, 20);
+                Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, window.x + window.width, window.y + 10, 5);
             }
 
         activeWin:
-            Kernel.canvas.DrawFilledRectangle(Color.FromArgb(23, 23, 23), activeWindow.x, activeWindow.y, activeWindow.width, activeWindow.height);
-            Kernel.canvas.DrawFilledRectangle(Color.FromArgb(50, 50, 50), activeWindow.x, activeWindow.y, activeWindow.width, 20);
+            Kernel.canvas.DrawFilledRectangle(Kernel.primaryPalette.Mantle, activeWindow.x, activeWindow.y, activeWindow.width, activeWindow.height);
+            Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Crust, activeWindow.x, activeWindow.y, activeWindow.width, 20, 15, Kernel.primaryPalette.Blue);
+            Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, activeWindow.x + activeWindow.width - 10, activeWindow.y + 10, 5);
         }
 
         public static void Update()
         {
-            // CheckAllState();
             DrawAll();
-        }
-
-        public static void CheckAllState()
-        {
-            foreach (var window in openedWindows)
-            {
-                if (window.windowState == WindowState.Active)
-                {
-                    activeWindow = window;
-                }
-                else if (window.windowState == WindowState.Minimized)
-                {
-                    openedWindows.Remove(window);
-                    minimizedWindows.Add(window);
-                }
-                else if (window.windowState == WindowState.Closed)
-                {
-                    openedWindows.Remove(window);
-                }
-            }
-
-            foreach (var window in minimizedWindows)
-            {
-                if (window.windowState == WindowState.Active)
-                {
-                    activeWindow = window;
-                }
-                else if (window.windowState == WindowState.Open)
-                {
-                    openedWindows.Add(window);
-                    minimizedWindows.Remove(window);
-                }
-                else if (window.windowState == WindowState.Closed)
-                {
-                    minimizedWindows.Remove(window);
-                }
-            }
         }
 
         public static void NewWindow(Window window)
         {
-            if (window.windowState == WindowState.Open)
-            {
-                openedWindows.Add(window);
-            }
-            else if (window.windowState == WindowState.Active)
-            {
-                activeWindow = window;
-            }
-            else if (window.windowState == WindowState.Minimized)
-            {
-                minimizedWindows.Add(window);
-            }
-            else if (window.windowState == WindowState.Closed)
+            if (window.windowState == WindowState.Closed)
             {
                 return;
+            } else
+            {
+                window.id = GetCurrentID();
+                windowsList.Add(window);
+                activeWindow = window;
             }
         }
 
         public static void NewWindow(int ID, string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, List<Widget> WIDGETS)
         {
-            if (WINDOWSTATE == WindowState.Open)
+            if (WINDOWSTATE == WindowState.Closed)
             {
-                openedWindows.Add(new()
+                return;
+            } else
+            {
+                windowsList.Add(new()
                 {
-                    id = ID,
+                    id = GetCurrentID(),
                     title = TITLE,
                     closed = CLOSED,
                     x = X,
@@ -116,12 +79,9 @@ namespace ReturnOS.Graphical
                     windowState = WINDOWSTATE,
                     widgets = WIDGETS
                 });
-            }
-            else if (WINDOWSTATE == WindowState.Active)
-            {
                 activeWindow = new()
                 {
-                    id = ID,
+                    id = GetCurrentID(),
                     title = TITLE,
                     closed = CLOSED,
                     x = X,
@@ -132,26 +92,12 @@ namespace ReturnOS.Graphical
                     widgets = WIDGETS
                 };
             }
-            else if (WINDOWSTATE == WindowState.Minimized)
-            {
-                minimizedWindows.Add(new()
-                {
-                    id = ID,
-                    title = TITLE,
-                    closed = CLOSED,
-                    x = X,
-                    y = Y,
-                    width = WIDTH,
-                    height = HEIGHT,
-                    windowState = WINDOWSTATE,
-                    widgets = WIDGETS
-                });
-            }
-            else if (WINDOWSTATE == WindowState.Closed)
-            {
-                return;
-            }
+        }
 
+        public static int GetCurrentID()
+        {
+            currentID++;
+            return currentID;
         }
     }
 

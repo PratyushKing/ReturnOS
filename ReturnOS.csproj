@@ -20,15 +20,20 @@
         <CompressionType>Gzip</CompressionType>
         <OptimizationLevel>2</OptimizationLevel>
         <VMWareEdition>Workstation</VMWareEdition>
+        <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
       <None Remove="Resources\back.bmp" />
+      <None Remove="Resources\Comfortaa-Regular.acf" />
+      <None Remove="Resources\Comfortaa-Regular.ttf" />
       <None Remove="Resources\cursor.bmp" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\back.bmp" />
+      <EmbeddedResource Include="Resources\Comfortaa-Regular.acf" />
+      <EmbeddedResource Include="Resources\Comfortaa-Regular.ttf" />
       <EmbeddedResource Include="Resources\cursor.bmp" />
     </ItemGroup>
 
@@ -37,6 +42,7 @@
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
+        <PackageReference Include="CosmosTTF" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
