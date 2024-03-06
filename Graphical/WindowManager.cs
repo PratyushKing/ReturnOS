@@ -16,7 +16,7 @@ namespace ReturnOS.Graphical
 
         public static List<Window> windowsList = new();
         public static Window activeWindow = new();
-        public static int currentID = 0;
+        public static int currentID = -1;
 
         public static void DrawAll()
         {
@@ -37,7 +37,7 @@ namespace ReturnOS.Graphical
             }
 
         activeWin:
-            Kernel.canvas.DrawFilledRectangle(Kernel.primaryPalette.Mantle, activeWindow.x, activeWindow.y, activeWindow.width, activeWindow.height);
+            Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Mantle, activeWindow.x, activeWindow.y, activeWindow.width, activeWindow.height, 15, Kernel.primaryPalette.Blue);
             Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Crust, activeWindow.x, activeWindow.y, activeWindow.width, 20, 15, Kernel.primaryPalette.Blue);
             Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, activeWindow.x + activeWindow.width - 10, activeWindow.y + 10, 5);
         }
@@ -60,16 +60,17 @@ namespace ReturnOS.Graphical
             }
         }
 
-        public static void NewWindow(int ID, string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, List<Widget> WIDGETS)
+        public static void NewWindow(string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, List<Widget> WIDGETS)
         {
             if (WINDOWSTATE == WindowState.Closed)
             {
                 return;
             } else
             {
+                var RecievedID = GetCurrentID();
                 windowsList.Add(new()
                 {
-                    id = GetCurrentID(),
+                    id = RecievedID,
                     title = TITLE,
                     closed = CLOSED,
                     x = X,
@@ -81,7 +82,7 @@ namespace ReturnOS.Graphical
                 });
                 activeWindow = new()
                 {
-                    id = GetCurrentID(),
+                    id = RecievedID,
                     title = TITLE,
                     closed = CLOSED,
                     x = X,

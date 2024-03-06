@@ -15,9 +15,11 @@ namespace ReturnOS.Graphical.Deskgets
         public static void Draw(SVGAIICanvas canvas)
         {
             canvas.DrawFilledRectangle(Kernel.primaryPalette.GeneralSurfaceColor, 0, 0, 1368, 30);
-            canvas.DrawStringTTF(Kernel.primaryPalette.Text, "O:" + (int)WindowManager.windowsList.Count, "main", 15, new(Kernel.Width - 100, 20));
+            var textWidth = TTFManager.GetTTFWidth(DateTime.Now.ToString("dd/MM/yyyy hh:mm") + "  FPS: " + Kernel.FPS, "main", 15);
+            canvas.DrawStringTTF(Kernel.primaryPalette.Text, DateTime.Now.ToString("dd/MM/yyyy hh:mm") + "  FPS: " + Kernel.FPS, "main", 15, new(Kernel.Width - textWidth - 5, 20));
 
             canvas.DrawFilledRectangle(Kernel.primaryPalette.Base, 0, 0, 30, 30);
+            canvas.DrawStringTTF(Kernel.primaryPalette.Text, WindowManager.windowsList[0].title, "mainBold", 15, new(35, 20));
         }
 
     }

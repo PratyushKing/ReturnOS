@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <None Remove="Resources\back.bmp" />
+      <None Remove="Resources\Comfortaa-Bold.ttf" />
       <None Remove="Resources\Comfortaa-Regular.acf" />
       <None Remove="Resources\Comfortaa-Regular.ttf" />
       <None Remove="Resources\cursor.bmp" />
@@ -32,6 +33,7 @@
 
     <ItemGroup>
       <EmbeddedResource Include="Resources\back.bmp" />
+      <EmbeddedResource Include="Resources\Comfortaa-Bold.ttf" />
       <EmbeddedResource Include="Resources\Comfortaa-Regular.acf" />
       <EmbeddedResource Include="Resources\Comfortaa-Regular.ttf" />
       <EmbeddedResource Include="Resources\cursor.bmp" />

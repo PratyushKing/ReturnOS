@@ -36,6 +36,7 @@ namespace ReturnOS
         [ManifestResourceStream(ResourceName = "ReturnOS.Resources.cursor.bmp")] public static byte[] cursor_raw;
         public static Bitmap cursor = new Bitmap(cursor_raw);
         [ManifestResourceStream(ResourceName = "ReturnOS.Resources.Comfortaa-Regular.ttf")] public static byte[] mainFont;
+        [ManifestResourceStream(ResourceName = "ReturnOS.Resources.Comfortaa-Bold.ttf")] public static byte[] mainFont_Bold;
 
         public static Dictionary<string, string> variables = new Dictionary<string, string>() {
             { "SHELL", "[$USER@$HOSTNAME] ($CDIR) $USERSIGN" },
@@ -122,8 +123,9 @@ namespace ReturnOS
             Sys.MouseManager.Y = 768 / 2;
             ConsoleLib.WriteSystemInfo(Result.OK, "Loading fonts");
             TTFManager.RegisterFont("main", mainFont);
+            TTFManager.RegisterFont("mainBold", mainFont_Bold);
             ConsoleLib.WriteSystemInfo(Result.OK, "Loading Welcome window!");
-            WindowManager.NewWindow(0, "Welcome to ReturnOS!", false, 1360 / 2 - 250, 768 / 2 - 125, 500, 250, WindowState.Active, new List<Widget>());
+            WindowManager.NewWindow("Welcome to ReturnOS!", false, 1360 / 2 - 250, 768 / 2 - 125, 500, 250, WindowState.Active, new List<Widget>());
         }
 
         public static int FPS = 0;
@@ -151,7 +153,7 @@ namespace ReturnOS
             Ticken++;
         }
 
-        public static int framesBeforeHeapCollect = 8;
+        public static int framesBeforeHeapCollect = 4;
         public static int framesNeededToHeapCollect = 0;
 
         protected override void Run()
@@ -167,7 +169,7 @@ namespace ReturnOS
             if (!bootIntoSetup)
                 SetupMgr.Setup(isUsingLVFS);
 
-            WindowManager.Update();
+            // WindowManager.Update();
             TopMenu.Draw(canvas);
             MouseMgr.ShowAndManage();
             canvas.Display();
@@ -267,11 +269,11 @@ namespace ReturnOS
                 }
                 if (found == true)
                 {
-                    canvas.DrawFilledRectangle(borderColor, Start_X, Start_Y, End_X - Start_X, 1);
+                    canvas.DrawFilledRectangle(backgroundColor, Start_X, Start_Y, End_X - Start_X, 1);
                 }
                 else
                 {
-                    canvas.DrawFilledRectangle(borderColor, x, j, width, 1);
+                    canvas.DrawFilledRectangle(backgroundColor, x, j, width, 1);
                 }
                 found = false;
             }
