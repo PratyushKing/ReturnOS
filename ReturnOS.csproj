@@ -29,6 +29,7 @@
       <None Remove="Resources\Comfortaa-Regular.acf" />
       <None Remove="Resources\Comfortaa-Regular.ttf" />
       <None Remove="Resources\cursor.bmp" />
+      <None Remove="Resources\ReturnOSLogo.bmp" />
     </ItemGroup>
 
     <ItemGroup>
@@ -37,6 +38,7 @@
       <EmbeddedResource Include="Resources\Comfortaa-Regular.acf" />
       <EmbeddedResource Include="Resources\Comfortaa-Regular.ttf" />
       <EmbeddedResource Include="Resources\cursor.bmp" />
+      <EmbeddedResource Include="Resources\ReturnOSLogo.bmp" />
     </ItemGroup>
 
     <ItemGroup>

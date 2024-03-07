@@ -1,4 +1,5 @@
 ﻿using Cosmos.System.Graphics;
+using CosmosTTF;
 using IL2CPU.API.Attribs;
 using System;
 using System.Collections.Generic;
@@ -31,20 +32,29 @@ namespace ReturnOS.Graphical
                 {
                     continue;
                 }
-                Kernel.canvas.DrawFilledRectangle(Kernel.primaryPalette.Base, window.x, window.y, window.width, window.height);
-                Kernel.canvas.DrawFilledRectangle(Kernel.primaryPalette.Inactive, window.x, window.y, window.width, 20);
-                Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, window.x + window.width, window.y + 10, 5);
+                Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Base, window.x, window.y, window.width, window.height, 15);
+                Kernel.canvas.DrawStringTTF(Kernel.primaryPalette.Text, window.title, "mainBold", 12, new(window.x + 6, window.y + 15));
+                Kernel.canvas.DrawLine(Kernel.primaryPalette.SubText0, window.x + 10, window.y + 25, window.x + window.width - 10, window.y + 25);
+                //Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Inactive, window.x, window.y, window.width, 20, 15);
+                Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, window.x + window.width - 15, window.y + 10, 5);
             }
 
         activeWin:
-            Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Mantle, activeWindow.x, activeWindow.y, activeWindow.width, activeWindow.height, 15, Kernel.primaryPalette.Blue);
-            Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Crust, activeWindow.x, activeWindow.y, activeWindow.width, 20, 15, Kernel.primaryPalette.Blue);
-            Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, activeWindow.x + activeWindow.width - 10, activeWindow.y + 10, 5);
+            Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Mantle, activeWindow.x, activeWindow.y, activeWindow.width, activeWindow.height, 15);
+            Kernel.canvas.DrawStringTTF(Kernel.primaryPalette.Text, activeWindow.title, "mainBold", 14, new(activeWindow.x + 10, activeWindow.y + 20));
+            Kernel.canvas.DrawLine(Kernel.primaryPalette.SubText0, activeWindow.x + 10, activeWindow.y + 25, activeWindow.x + activeWindow.width - 10, activeWindow.y + 25);
+            //Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Blue, activeWindow.x + 2, activeWindow.y + 2, activeWindow.width - 8, 15, 8);
+            Kernel.canvas.DrawFilledCircle(Kernel.primaryPalette.Red, activeWindow.x + activeWindow.width - 15, activeWindow.y + 15, 5);
         }
 
         public static void Update()
         {
             DrawAll();
+        }
+
+        public static void SendMouseEventToActiveWindow(MouseMgr.MouseEvent mouseEvent)
+        {
+
         }
 
         public static void NewWindow(Window window)
@@ -110,6 +120,16 @@ namespace ReturnOS.Graphical
         public int x, y, width, height;
         public WindowState windowState = WindowState.Open;
         public List<Widget> widgets;
+
+        public void TriggerMouseEvent(MouseMgr.MouseEvent mouseEvent)
+        {
+            if (mouseEvent.x > x && mouseEvent.x < width &&
+                mouseEvent.y > y && mouseEvent.y < 25 &&
+                mouseEvent.clicked == Cosmos.System.MouseState.Left)
+            {
+                x = mouseEvent.x - width - x;
+            }
+        }
     }
 
     public struct Widget

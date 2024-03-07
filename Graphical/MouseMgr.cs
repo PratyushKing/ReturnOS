@@ -8,8 +8,14 @@ using System.Threading.Tasks;
 
 namespace ReturnOS.Graphical
 {
-    internal class MouseMgr
+    public class MouseMgr
     {
+        public struct MouseEvent
+        {
+            public MouseState clicked;
+            public int x, y;
+        }
+
         public static void ShowAndManage()
         {            
             if ((int)MouseManager.X + Kernel.cursor.Width >= Kernel.Width)
@@ -20,6 +26,11 @@ namespace ReturnOS.Graphical
                 MouseManager.Y = Kernel.Height - Kernel.cursor.Height;
             }
             Kernel.canvas.DrawImageAlpha(Kernel.cursor, (int)Cosmos.System.MouseManager.X, (int)Cosmos.System.MouseManager.Y);
+            if (MouseManager.MouseState != MouseState.None)
+            {
+                MouseEvent heldMouseEvent = new() { clicked = MouseManager.MouseState, x = (int)MouseManager.X, y = (int)MouseManager.Y };
+                WindowManager.SendMouseEventToActiveWindow(heldMouseEvent);
+            }
         }
     }
 }

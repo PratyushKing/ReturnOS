@@ -38,6 +38,9 @@ namespace ReturnOS
         [ManifestResourceStream(ResourceName = "ReturnOS.Resources.Comfortaa-Regular.ttf")] public static byte[] mainFont;
         [ManifestResourceStream(ResourceName = "ReturnOS.Resources.Comfortaa-Bold.ttf")] public static byte[] mainFont_Bold;
 
+        [ManifestResourceStream(ResourceName = "ReturnOS.Resources.ReturnOSLogo.bmp")] public static byte[] logo_raw;
+        public static Bitmap logo = new Bitmap(logo_raw);
+
         public static Dictionary<string, string> variables = new Dictionary<string, string>() {
             { "SHELL", "[$USER@$HOSTNAME] ($CDIR) $USERSIGN" },
             { "LOGNAME", "" },
@@ -65,9 +68,10 @@ namespace ReturnOS
             Text = Color.FromArgb(205, 214, 244),
             Base = Color.FromArgb(30, 30, 46),
             GeneralSurfaceColor = Color.FromArgb(49, 50, 68),
-            Mantle = Color.FromArgb(17, 17, 27),
+            Mantle = Color.FromArgb(24, 24, 37),
             Inactive = Color.FromArgb(127, 132, 156),
-            Crust = Color.FromArgb(17, 17, 27)
+            Crust = Color.FromArgb(17, 17, 27),
+            SubText0 = Color.FromArgb(166, 173, 200)
         };
 
         protected override void BeforeRun()
@@ -169,7 +173,7 @@ namespace ReturnOS
             if (!bootIntoSetup)
                 SetupMgr.Setup(isUsingLVFS);
 
-            // WindowManager.Update();
+            WindowManager.Update();
             TopMenu.Draw(canvas);
             MouseMgr.ShowAndManage();
             canvas.Display();
@@ -178,140 +182,18 @@ namespace ReturnOS
         public struct ColorPalette
         {
             public Color RoseWater, Flamingo, Pink, Mauve, Red, Maroon, Peach, Yellow, Green, Teal, Sky, Sapphire, Blue, Lavender;
-            public Color Text, GeneralSurfaceColor, Base, Mantle, Inactive, Crust;
+            public Color Text, GeneralSurfaceColor, Base, Mantle, Inactive, Crust, SubText0;
         }
 
-        public static void DrawRoundRectangle(int x, int y, int width, int height, int cornerRadius, Color borderColor)
+        public static void DrawFilledRoundRectangle(Color backgroundColor, int x, int y, int width, int height, int cornerRadius)
         {
-            int xEnd = x + width - 1;
-            int yEnd = y + height - 1;
-
-            // Draw the top side
-            for (int i = x + cornerRadius; i < xEnd - cornerRadius; i++)
-            {
-                canvas.DrawPoint(borderColor, i, y);
-            }
-
-            // Draw the top-right corner
-            DrawCorner(borderColor, xEnd - cornerRadius, y + cornerRadius, cornerRadius, 270, 360);
-
-            // Draw the right side
-            for (int i = y + cornerRadius; i < yEnd - cornerRadius; i++)
-            {
-                canvas.DrawPoint(borderColor, xEnd, i);
-            }
-
-            // Draw the bottom-right corner
-            DrawCorner(borderColor, xEnd - cornerRadius, yEnd - cornerRadius, cornerRadius, 0, 90);
-
-            // Draw the bottom side
-            for (int i = xEnd - cornerRadius; i >= x + cornerRadius; i--)
-            {
-                canvas.DrawPoint(borderColor, i, yEnd);
-            }
-
-            // Draw the bottom-left corner
-            DrawCorner(borderColor, x + cornerRadius, yEnd - cornerRadius, cornerRadius, 90, 180);
-
-            // Draw the left side
-            for (int i = yEnd - cornerRadius; i >= y + cornerRadius; i--)
-            {
-                canvas.DrawPoint(borderColor, x, i);
-            }
-
-            // Draw the top-left corner
-            DrawCorner(borderColor, x + cornerRadius, y + cornerRadius, cornerRadius, 180, 270);
-        }
-        public static void DrawFilledRoundRectangle(Color backgroundColor, int x, int y, int width, int height, int cornerRadius, Color borderColor)
-        {
-            DrawRoundRectangle(x, y, width, height, cornerRadius, borderColor);
-
-            int xEnd = x + width - 1;
-            int yEnd = y + height - 1;
-
-            int Start_X = 0;
-            int Start_Y = 0;
-
-            int End_X = 0;
-            int End_Y = 0;
-
-            bool found = false;
-
-            for (int j = y; j < y + height; j++)
-            {
-                for (int i = x; i < x + width; i++)
-                {
-                    if (IsOnRoundedRectangleBorder(i, j, x, y, width, height, cornerRadius))
-                    {
-                        Start_X = i;
-                        Start_Y = j;
-                        found = true;
-                        break;
-                    }
-                    if (i == x + 10)
-                    {
-                        break;
-                    }
-                }
-                for (int i = x + width; i > x; i--)
-                {
-                    if (IsOnRoundedRectangleBorder(i, j, x, y, width, height, cornerRadius))
-                    {
-                        End_X = i;
-                        End_Y = j;
-                        found = true;
-                        break;
-                    }
-                    if (i == x + width - 10)
-                    {
-                        break;
-                    }
-                }
-                if (found == true)
-                {
-                    canvas.DrawFilledRectangle(backgroundColor, Start_X, Start_Y, End_X - Start_X, 1);
-                }
-                else
-                {
-                    canvas.DrawFilledRectangle(backgroundColor, x, j, width, 1);
-                }
-                found = false;
-            }
-        }
-        static bool IsInCorner(int x, int y, int centerX, int centerY, int radius, int startAngle, int endAngle)
-        {
-            const double tolerance = 0.1; // Adjust tolerance as needed
-
-            for (int angle = startAngle; angle <= endAngle; angle++)
-            {
-                double radians = angle * Math.PI / 180.0;
-                int cornerX = (int)(centerX + radius * Math.Cos(radians));
-                int cornerY = (int)(centerY + radius * Math.Sin(radians));
-
-                if (Math.Abs(x - cornerX) < tolerance && Math.Abs(y - cornerY) < tolerance)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-        static void DrawCorner(Color color, int centerX, int centerY, int radius, int startAngle, int endAngle)
-        {
-            for (int angle = startAngle; angle <= endAngle; angle++)
-            {
-                double radians = angle * Math.PI / 180.0;
-                int x = (int)(centerX + radius * Math.Cos(radians));
-                int y = (int)(centerY + radius * Math.Sin(radians));
-                canvas.DrawPoint(color, x, y);
-            }
-        }
-        static bool IsOnRoundedRectangleBorder(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight, int cornerRadius)
-        {
-            return IsInCorner(x, y, rectX + cornerRadius, rectY + cornerRadius, cornerRadius, 180, 270) ||
-                   IsInCorner(x, y, rectX + rectWidth - cornerRadius, rectY + cornerRadius, cornerRadius, 270, 360) ||
-                   IsInCorner(x, y, rectX + cornerRadius, rectY + rectHeight - cornerRadius, cornerRadius, 90, 180) ||
-                   IsInCorner(x, y, rectX + rectWidth - cornerRadius, rectY + rectHeight - cornerRadius, cornerRadius, 0, 90);
+            canvas.DrawFilledRectangle(backgroundColor, x + cornerRadius, y, width - 2 * cornerRadius, height);
+            canvas.DrawFilledRectangle(backgroundColor, x, y + cornerRadius, cornerRadius, height - 2 * cornerRadius);
+            canvas.DrawFilledRectangle(backgroundColor, x + width - cornerRadius, y + cornerRadius, cornerRadius, height - 2 * cornerRadius);
+            canvas.DrawFilledCircle(backgroundColor, x + cornerRadius, y + cornerRadius, cornerRadius);
+            canvas.DrawFilledCircle(backgroundColor, x + width - cornerRadius - 1, y + cornerRadius, cornerRadius);
+            canvas.DrawFilledCircle(backgroundColor, x + cornerRadius, y + height - cornerRadius - 1, cornerRadius);
+            canvas.DrawFilledCircle(backgroundColor, x + width - cornerRadius - 1, y + height - cornerRadius - 1, cornerRadius);
         }
     }
 }
