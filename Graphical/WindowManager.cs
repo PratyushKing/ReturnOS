@@ -1,4 +1,5 @@
-﻿using Cosmos.System.Graphics;
+﻿using Cosmos.System;
+using Cosmos.System.Graphics;
 using CosmosTTF;
 using IL2CPU.API.Attribs;
 using System;
@@ -52,10 +53,7 @@ namespace ReturnOS.Graphical
             DrawAll();
         }
 
-        public static void SendMouseEventToActiveWindow(MouseMgr.MouseEvent mouseEvent)
-        {
-
-        }
+        public static void SendMouseEventToActiveWindow(MouseMgr.MouseEvent mouseEvent) => activeWindow.TriggerMouseEvent(mouseEvent);
 
         public static void NewWindow(Window window)
         {
@@ -65,22 +63,22 @@ namespace ReturnOS.Graphical
             } else
             {
                 window.id = GetCurrentID();
+                window.Init();
                 windowsList.Add(window);
                 activeWindow = window;
             }
         }
 
-        public static void NewWindow(string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, List<Widget> WIDGETS)
+        public static void NewWindow(string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, Action WIDGETS)
         {
             if (WINDOWSTATE == WindowState.Closed)
             {
                 return;
             } else
             {
-                var RecievedID = GetCurrentID();
-                windowsList.Add(new()
+                var window = new Window()
                 {
-                    id = RecievedID,
+                    id = GetCurrentID(),
                     title = TITLE,
                     closed = CLOSED,
                     x = X,
@@ -88,20 +86,11 @@ namespace ReturnOS.Graphical
                     width = WIDTH,
                     height = HEIGHT,
                     windowState = WINDOWSTATE,
-                    widgets = WIDGETS
-                });
-                activeWindow = new()
-                {
-                    id = RecievedID,
-                    title = TITLE,
-                    closed = CLOSED,
-                    x = X,
-                    y = Y,
-                    width = WIDTH,
-                    height = HEIGHT,
-                    windowState = WINDOWSTATE,
-                    widgets = WIDGETS
+                    drawWindowControls = WIDGETS
                 };
+                window.Init();
+                windowsList.Add(window);
+                activeWindow = window;
             }
         }
 
@@ -119,15 +108,24 @@ namespace ReturnOS.Graphical
         public bool closed;
         public int x, y, width, height;
         public WindowState windowState = WindowState.Open;
-        public List<Widget> widgets;
+        public Action drawWindowControls;
+
+        private int dragX, dragY;
+
+        public void Init()
+        {
+            dragX = (int)MouseManager.X - x; dragY = (int)MouseManager.Y - y;
+        }
 
         public void TriggerMouseEvent(MouseMgr.MouseEvent mouseEvent)
         {
-            if (mouseEvent.x > x && mouseEvent.x < width &&
-                mouseEvent.y > y && mouseEvent.y < 25 &&
+            Kernel.canvas.DrawFilledRectangle(Color.White, dragX, dragY, width, height);
+            if (mouseEvent.x > dragX && mouseEvent.x < width &&
+                mouseEvent.y > dragY && mouseEvent.y < 25 &&
                 mouseEvent.clicked == Cosmos.System.MouseState.Left)
             {
-                x = mouseEvent.x - width - x;
+                x = mouseEvent.x - dragX;
+                y = mouseEvent.y - dragY;
             }
         }
     }

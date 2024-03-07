@@ -1,5 +1,6 @@
 ﻿using Cosmos.System;
 using Cosmos.System.Graphics;
+using ReturnOS.Graphical.Deskgets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace ReturnOS.Graphical
             {
                 MouseEvent heldMouseEvent = new() { clicked = MouseManager.MouseState, x = (int)MouseManager.X, y = (int)MouseManager.Y };
                 WindowManager.SendMouseEventToActiveWindow(heldMouseEvent);
+                TopMenu.HandleMouseEvent(heldMouseEvent);
             }
         }
     }
