@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CosmosTTF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +14,35 @@ namespace ReturnOS.Graphical.Apps
             id = WindowManager.GetCurrentID();
             title = "Welcome to ReturnOS";
             closed = false;
-            x = WindowManager.GetCurrentDefaultPosition(width, height).Item1;
-            y = WindowManager.GetCurrentDefaultPosition(width, height).Item2;
             width = 500;
             height = 250;
+            x = WindowManager.GetCurrentDefaultPosition(width, height).Item1;
+            y = WindowManager.GetCurrentDefaultPosition(width, height).Item2;
             windowState = WindowState.Active;
             drawWindowControls = dWC;
         }
 
         public void dWC(WindowCanvas winCanvas)
         {
-            winCanvas.DrawFilledRectangle(Kernel.primaryPalette.Blue, 10, 10, 100, 50);
+            winCanvas.DrawFilledRectangle(Kernel.primaryPalette.Crust, 0, 0, winCanvas.width - 2, 50);
+            winCanvas.DrawString(Kernel.primaryPalette.Text, "Welcome to ReturnOS!", SystemFonts.General_Bold, 20, winCanvas.width / 2 - TTFManager.GetTTFWidth("Welcome to ReturnOS!", WindowManager.SystemFontsToString(SystemFonts.General_Bold), 20), 10);
+            
+            // OS Name ReturnOS
+            winCanvas.DrawString(Kernel.primaryPalette.SubText0, "OS Name", SystemFonts.General, 12, 5, 55);
+            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, "ReturnOS", SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("OS Name__", WindowManager.SystemFontsToString(SystemFonts.General_Bold), 12), 55);
+
+            // Memory <memory_available>
+            winCanvas.DrawString(Kernel.primaryPalette.SubText0, "Memory", SystemFonts.General, 12, 6, 70);
+            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, Math.Ceiling((Cosmos.Core.CPU.GetAmountOfRAM() / 8.0) * 8.0).ToString() + " MB", SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("Memory__", WindowManager.SystemFontsToString(SystemFonts.General_Bold), 12), 70);
+
+            winCanvas.DrawButton("Test", 80, 80, 40, 20, buttonTest);
         }
 
         public void register() => WindowManager.NewWindow(this);
+
+        public void buttonTest(MouseMgr.MouseEvent mouseEvent)
+        {
+
+        }
     }
 }

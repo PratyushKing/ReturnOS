@@ -91,7 +91,7 @@ namespace ReturnOS.Graphical
             return currentID;
         }
 
-        public static (int, int) GetCurrentDefaultPosition(int width, int height) { return (Kernel.Width / 2 - width, Kernel.Height / 2 - height); }
+        public static (int, int) GetCurrentDefaultPosition(int width, int height) { return (Kernel.Width / 2 - (width / 2), Kernel.Height / 2 - (height / 2)); }
 
         public static string SystemFontsToString(SystemFonts font)
         {
@@ -120,7 +120,7 @@ namespace ReturnOS.Graphical
         public int dragX, dragY;
         public bool dragging;
 
-        public void Init() {
+        public virtual void Init() {
             winCanvas = new WindowCanvas()
             {
                 x = this.x,
@@ -153,6 +153,8 @@ namespace ReturnOS.Graphical
                 {
                     y = Kernel.Height - height;
                 }
+                winCanvas.x = x;
+                winCanvas.y = y;
             }
 
             if ((int)MouseManager.X > x && (int)MouseManager.X < x + width
@@ -196,21 +198,23 @@ namespace ReturnOS.Graphical
         private bool CheckBounds(int x, int y, int w, int h)
         {
             if (x > this.x && y > this.y && x + w < this.width && y + h < this.height)
-                return true;
-            return false;
+                return false;
+            return true;
         }
         private bool CheckBounds(int x, int y)
         {
             if (x > this.x && y > this.y && x < this.width && y < this.height)
-                return true;
-            return false;
+                return false;
+            return true;
         }
 
-        public void DrawPoint(Color color, int x, int y) { if (!CheckBounds(x + this.x, y + this.y)) { return; } Kernel.canvas.DrawPoint(color, x + this.x, y + this.y); }
+        public void DrawPoint(Color color, int x, int y) { if (!CheckBounds(x + this.x + 2, y + this.y + 2)) { return; } Kernel.canvas.DrawPoint(color, x + this.x + 2, y + this.y + 27); }
 
-        public void DrawFilledRectangle(Color color, int x, int y, int width, int height) { if (!CheckBounds(x + this.x, y + this.y, width + this.width, height + this.height)) { return; } Kernel.canvas.DrawFilledRectangle(color, x + this.x, y + this.y, width + this.width, height + this.height); }
+        public void DrawFilledRectangle(Color color, int x, int y, int width, int height) { if (!CheckBounds(x + this.x + 2, y + this.y + 27, width, height)) { return; } Kernel.canvas.DrawFilledRectangle(color, x + this.x + 2, y + this.y + 27, width, height); }
 
-        public void DrawString(Color color, string text, SystemFonts font, int size, int x, int y) { if (!CheckBounds(x + this.x, y + this.y, TTFManager.GetTTFWidth(text, WindowManager.SystemFontsToString(font), size), size)) { return; } Kernel.canvas.DrawStringTTF(color, text, WindowManager.SystemFontsToString(font), size, new(x + this.x, y + this.y)); }
+        public void DrawString(Color color, string text, SystemFonts font, int size, int x, int y) { if (!CheckBounds(x + this.x + 2, y + this.y + 27 + size, TTFManager.GetTTFWidth(text, WindowManager.SystemFontsToString(font), size), size)) { return; } Kernel.canvas.DrawStringTTF(color, text, WindowManager.SystemFontsToString(font), size, new(x + this.x + 2, y + this.y + 27 + size)); }
+    
+        public void DrawButton(string text, int x, int y, int width, int height, Action<MouseMgr.MouseEvent> clicked) { if (!CheckBounds(x + this.x + 2, y + this.y + 27, width, height)) { return; } Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Crust, x + this.x + 2, y + this.y + 27, width, height, height / 4); DrawString(Kernel.primaryPalette.Text, text, SystemFonts.General, 12, (this.x + x + 2) / 2 - (text.Length), height / 2 - 6); }
     }
 
     public struct Widget

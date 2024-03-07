@@ -50,7 +50,7 @@ namespace ReturnOS.Graphical.Deskgets
             canvas.DrawFilledRectangle(Kernel.primaryPalette.GeneralSurfaceColor, 0, 0, 30, 30);
             canvas.DrawImageAlpha(Kernel.logo, 0, 0);
             canvas.DrawLine(Color.Gray, 35, 10, 35, 20);
-            canvas.DrawStringTTF(Kernel.primaryPalette.Text, (int)MouseManager.MouseState + " " + WindowManager.activeWindow.dragging + " " + ((int)MouseManager.X - WindowManager.activeWindow.dragX) + " " + (WindowManager.activeWindow.x) + " " + ((int)MouseManager.Y - WindowManager.activeWindow.dragY) + " " + (WindowManager.activeWindow.y), "mainBold", 15, new(45, 20));
+            canvas.DrawStringTTF(Kernel.primaryPalette.Text, WindowManager.activeWindow.title, "mainBold", 15, new(45, 20));
 
             if (menuOpen)
             {
