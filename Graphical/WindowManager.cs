@@ -92,6 +92,19 @@ namespace ReturnOS.Graphical
         }
 
         public static (int, int) GetCurrentDefaultPosition(int width, int height) { return (Kernel.Width / 2 - width, Kernel.Height / 2 - height); }
+
+        public static string SystemFontsToString(SystemFonts font)
+        {
+            switch (font)
+            {
+                case SystemFonts.General:
+                    return "main";
+                case SystemFonts.General_Bold:
+                    return "mainBold";
+                default:
+                    return "";
+            }
+        }
     }
 
     public class Window
@@ -102,11 +115,20 @@ namespace ReturnOS.Graphical
         public int x, y, width, height;
         public WindowState windowState = WindowState.Open;
         public Action<WindowCanvas> drawWindowControls;
+        public WindowCanvas winCanvas;
 
         public int dragX, dragY;
         public bool dragging;
 
-        public void Init() { }
+        public void Init() {
+            winCanvas = new WindowCanvas()
+            {
+                x = this.x,
+                y = this.y,
+                width = this.width,
+                height = this.height,
+            };
+        }
 
         public void checkLogic()
         {
@@ -160,20 +182,47 @@ namespace ReturnOS.Graphical
         {
             checkLogic();
             drawWindow();
+            drawWindowControls(winCanvas);
         }
     }
 
     public struct WindowCanvas
     {
-        public int x, y, width, height;
+        public int x;
+        public int y;
+        public int width;
+        public int height;
 
-        
+        private bool CheckBounds(int x, int y, int w, int h)
+        {
+            if (x > this.x && y > this.y && x + w < this.width && y + h < this.height)
+                return true;
+            return false;
+        }
+        private bool CheckBounds(int x, int y)
+        {
+            if (x > this.x && y > this.y && x < this.width && y < this.height)
+                return true;
+            return false;
+        }
+
+        public void DrawPoint(Color color, int x, int y) { if (!CheckBounds(x + this.x, y + this.y)) { return; } Kernel.canvas.DrawPoint(color, x + this.x, y + this.y); }
+
+        public void DrawFilledRectangle(Color color, int x, int y, int width, int height) { if (!CheckBounds(x + this.x, y + this.y, width + this.width, height + this.height)) { return; } Kernel.canvas.DrawFilledRectangle(color, x + this.x, y + this.y, width + this.width, height + this.height); }
+
+        public void DrawString(Color color, string text, SystemFonts font, int size, int x, int y) { if (!CheckBounds(x + this.x, y + this.y, TTFManager.GetTTFWidth(text, WindowManager.SystemFontsToString(font), size), size)) { return; } Kernel.canvas.DrawStringTTF(color, text, WindowManager.SystemFontsToString(font), size, new(x + this.x, y + this.y)); }
     }
 
     public struct Widget
     {
         public string name;
         public int x, y, width, height;
+    }
+
+    public enum SystemFonts
+    {
+        General, // Comfortaa
+        General_Bold // Comfartaa Bold
     }
 
     public enum WindowState

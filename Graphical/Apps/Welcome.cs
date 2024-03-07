@@ -23,7 +23,9 @@ namespace ReturnOS.Graphical.Apps
 
         public void dWC(WindowCanvas winCanvas)
         {
-
+            winCanvas.DrawFilledRectangle(Kernel.primaryPalette.Blue, 10, 10, 100, 50);
         }
+
+        public void register() => WindowManager.NewWindow(this);
     }
 }

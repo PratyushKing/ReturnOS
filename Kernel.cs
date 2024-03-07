@@ -13,6 +13,7 @@ using s = System;
 using Sys = Cosmos.System;
 using CosmosTTF;
 using Cosmos.Core.Memory;
+using ReturnOS.Graphical.Apps;
 
 namespace ReturnOS
 {
@@ -128,6 +129,9 @@ namespace ReturnOS
             ConsoleLib.WriteSystemInfo(Result.OK, "Loading fonts");
             TTFManager.RegisterFont("main", mainFont);
             TTFManager.RegisterFont("mainBold", mainFont_Bold);
+            ConsoleLib.WriteSystemInfo(Result.OK, "Initializing all applications");
+            Welcome welcome = new();
+            welcome.register();
         }
 
         public static int FPS = 0;
