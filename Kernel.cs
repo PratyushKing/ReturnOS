@@ -128,8 +128,6 @@ namespace ReturnOS
             ConsoleLib.WriteSystemInfo(Result.OK, "Loading fonts");
             TTFManager.RegisterFont("main", mainFont);
             TTFManager.RegisterFont("mainBold", mainFont_Bold);
-            ConsoleLib.WriteSystemInfo(Result.OK, "Loading Welcome window!");
-            WindowManager.NewWindow("Welcome to ReturnOS!", false, 1360 / 2 - 250, 768 / 2 - 125, 500, 250, WindowState.Active, null);
         }
 
         public static int FPS = 0;

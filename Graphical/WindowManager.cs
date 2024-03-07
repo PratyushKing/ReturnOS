@@ -60,7 +60,7 @@ namespace ReturnOS.Graphical
             }
         }
 
-        public static void NewWindow(string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, Action WIDGETS)
+        public static void NewWindow(string TITLE, bool CLOSED, int X, int Y, int WIDTH, int HEIGHT, WindowState WINDOWSTATE, Action<WindowCanvas> WIDGETS)
         {
             if (WINDOWSTATE == WindowState.Closed)
             {
@@ -90,6 +90,8 @@ namespace ReturnOS.Graphical
             currentID++;
             return currentID;
         }
+
+        public static (int, int) GetCurrentDefaultPosition(int width, int height) { return (Kernel.Width / 2 - width, Kernel.Height / 2 - height); }
     }
 
     public class Window
@@ -99,7 +101,7 @@ namespace ReturnOS.Graphical
         public bool closed;
         public int x, y, width, height;
         public WindowState windowState = WindowState.Open;
-        public Action drawWindowControls;
+        public Action<WindowCanvas> drawWindowControls;
 
         public int dragX, dragY;
         public bool dragging;
@@ -159,6 +161,13 @@ namespace ReturnOS.Graphical
             checkLogic();
             drawWindow();
         }
+    }
+
+    public struct WindowCanvas
+    {
+        public int x, y, width, height;
+
+        
     }
 
     public struct Widget
