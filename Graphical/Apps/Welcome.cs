@@ -1,6 +1,7 @@
 ﻿using CosmosTTF;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,14 +40,13 @@ namespace ReturnOS.Graphical.Apps
             winCanvas.DrawString(Kernel.primaryPalette.SubText0, "Version", SystemFonts.General, 12, 5, 85);
             winCanvas.DrawString(Kernel.primaryPalette.Sapphire, Kernel.Version, SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("Version__", WindowManager.SystemFontsToString(SystemFonts.General), 12), 85);
 
-            // winCanvas.DrawButton("Test", 80, 80, 40, 20, buttonTest);
+            winCanvas.DrawButton("Test", 80, 80, 40, 20, buttonTest);
         }
 
         public void register() => WindowManager.NewWindow(this);
 
-        public void buttonTest(MouseMgr.MouseEvent mouseEvent)
+        public void buttonTest(MouseMgr.MouseEvent mouseEvent, WindowCanvas winCanvas)
         {
-
         }
     }
 }
