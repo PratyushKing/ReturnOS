@@ -30,6 +30,7 @@ namespace ReturnOS
 
         public const int Width = 1360;
         public const int Height = 768;
+        public const string Version = "v0.1";
 
         [ManifestResourceStream(ResourceName = "ReturnOS.Resources.back.bmp")] public static byte[] background_raw;
         public static Bitmap background = new Bitmap(background_raw);

@@ -194,6 +194,24 @@ namespace ReturnOS.Graphical
         public int y;
         public int width;
         public int height;
+        public List<Action<MouseMgr.MouseEvent>> bBA; // binded Button Actions
+
+        public void TriggerMouseEvent(MouseMgr.MouseEvent evt)
+        {
+            foreach (var button in bBA)
+            {
+                button(evt);
+            }
+        }
+
+        public WindowCanvas(int x, int y, int width, int height)
+        {
+            bBA = new();
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
 
         private bool CheckBounds(int x, int y, int w, int h)
         {
@@ -214,7 +232,7 @@ namespace ReturnOS.Graphical
 
         public void DrawString(Color color, string text, SystemFonts font, int size, int x, int y) { if (!CheckBounds(x + this.x + 2, y + this.y + 27 + size, TTFManager.GetTTFWidth(text, WindowManager.SystemFontsToString(font), size), size)) { return; } Kernel.canvas.DrawStringTTF(color, text, WindowManager.SystemFontsToString(font), size, new(x + this.x + 2, y + this.y + 27 + size)); }
     
-        public void DrawButton(string text, int x, int y, int width, int height, Action<MouseMgr.MouseEvent> clicked) { if (!CheckBounds(x + this.x + 2, y + this.y + 27, width, height)) { return; } Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Crust, x + this.x + 2, y + this.y + 27, width, height, height / 4); DrawString(Kernel.primaryPalette.Text, text, SystemFonts.General, 12, (this.x + x + 2) / 2 - (text.Length), height / 2 - 6); }
+        public void DrawButton(string text, int x, int y, int width, int height, Action<MouseMgr.MouseEvent> clicked) { if (!CheckBounds(x + this.x + 2, y + this.y + 27, width, height)) { return; } Kernel.DrawFilledRoundRectangle(Kernel.primaryPalette.Crust, x + this.x + 2, y + this.y + 27, width, height, height / 4); DrawString(Kernel.primaryPalette.Text, text, SystemFonts.General, 12, (this.x + x + 2) / 2 - (TTFManager.GetTTFWidth(text, WindowManager.SystemFontsToString(SystemFonts.General), 12)), (this.y + y) + height / 2 - 6); }
     }
 
     public struct Widget

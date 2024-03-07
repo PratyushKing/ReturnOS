@@ -30,6 +30,7 @@ namespace ReturnOS.Graphical
             if (MouseManager.MouseState != MouseState.None && !WindowManager.isDragging)
             {
                 MouseEvent heldMouseEvent = new() { clicked = MouseManager.MouseState, x = (int)MouseManager.X, y = (int)MouseManager.Y };
+                WindowManager.activeWindow.winCanvas.TriggerMouseEvent(heldMouseEvent);
                 TopMenu.HandleMouseEvent(heldMouseEvent);
             }
         }

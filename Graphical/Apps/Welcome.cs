@@ -29,13 +29,17 @@ namespace ReturnOS.Graphical.Apps
             
             // OS Name ReturnOS
             winCanvas.DrawString(Kernel.primaryPalette.SubText0, "OS Name", SystemFonts.General, 12, 5, 55);
-            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, "ReturnOS", SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("OS Name__", WindowManager.SystemFontsToString(SystemFonts.General_Bold), 12), 55);
+            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, "ReturnOS", SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("OS Name__", WindowManager.SystemFontsToString(SystemFonts.General), 12), 55);
 
             // Memory <memory_available>
             winCanvas.DrawString(Kernel.primaryPalette.SubText0, "Memory", SystemFonts.General, 12, 6, 70);
-            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, Math.Ceiling((Cosmos.Core.CPU.GetAmountOfRAM() / 8.0) * 8.0).ToString() + " MB", SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("Memory__", WindowManager.SystemFontsToString(SystemFonts.General_Bold), 12), 70);
+            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, Math.Ceiling((Cosmos.Core.CPU.GetAmountOfRAM() / 8.0) * 8.0).ToString() + " MB", SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("Memory__", WindowManager.SystemFontsToString(SystemFonts.General), 12), 70);
 
-            winCanvas.DrawButton("Test", 80, 80, 40, 20, buttonTest);
+            // Version <current_version>
+            winCanvas.DrawString(Kernel.primaryPalette.SubText0, "Version", SystemFonts.General, 12, 5, 85);
+            winCanvas.DrawString(Kernel.primaryPalette.Sapphire, Kernel.Version, SystemFonts.General_Bold, 12, TTFManager.GetTTFWidth("Version__", WindowManager.SystemFontsToString(SystemFonts.General), 12), 85);
+
+            // winCanvas.DrawButton("Test", 80, 80, 40, 20, buttonTest);
         }
 
         public void register() => WindowManager.NewWindow(this);
