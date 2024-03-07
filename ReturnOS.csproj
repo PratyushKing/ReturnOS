@@ -21,6 +21,8 @@
         <OptimizationLevel>2</OptimizationLevel>
         <VMWareEdition>Workstation</VMWareEdition>
         <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+        <AllowComments>True</AllowComments>
+        <RemoveBootDebugOutput>True</RemoveBootDebugOutput>
     </PropertyGroup>
 
     <ItemGroup>
@@ -46,7 +48,7 @@
         <PackageReference Include="Cosmos.Debug.Kernel" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
         <PackageReference Include="Cosmos.Plugs" Version="0-*" NoWarn="NU1604" />
-        <PackageReference Include="CosmosTTF" Version="2.0.0" />
+        <PackageReference Include="CosmosTTF" Version="2.0.0" NoWarn="NU1604" />
     </ItemGroup>
 
     <ItemGroup>

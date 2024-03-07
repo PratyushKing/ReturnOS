@@ -30,7 +30,6 @@ namespace ReturnOS.Graphical
             if (MouseManager.MouseState != MouseState.None)
             {
                 MouseEvent heldMouseEvent = new() { clicked = MouseManager.MouseState, x = (int)MouseManager.X, y = (int)MouseManager.Y };
-                WindowManager.SendMouseEventToActiveWindow(heldMouseEvent);
                 TopMenu.HandleMouseEvent(heldMouseEvent);
             }
         }

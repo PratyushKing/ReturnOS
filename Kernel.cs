@@ -157,12 +157,12 @@ namespace ReturnOS
             Ticken++;
         }
 
-        public static int framesBeforeHeapCollect = 4;
+        public static int framesBeforeHeapCollect = 2;
         public static int framesNeededToHeapCollect = 0;
 
         protected override void Run()
         {
-            if (framesNeededToHeapCollect >= framesBeforeHeapCollect)
+            if (framesNeededToHeapCollect == framesBeforeHeapCollect)
             {
                 Heap.Collect();
                 framesNeededToHeapCollect = 0;
