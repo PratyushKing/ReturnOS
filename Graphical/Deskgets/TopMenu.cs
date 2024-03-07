@@ -22,6 +22,24 @@ namespace ReturnOS.Graphical.Deskgets
             DrawSeparator2,
             DrawLogOutButton
         };
+        public static Dictionary<int, int> contentsXY = new Dictionary<int, int>();
+        public static readonly List<string> contentsStr = new List<string>() {
+            "About",
+            "IGNORE",
+            "Shutdown",
+            "Restart",
+            "IGNORE",
+            "Log Out"
+        };
+        public static readonly List<Color> contentFontColors = new List<Color>()
+        {
+            Kernel.primaryPalette.Text,
+            Color.Black, //placeholder
+            Kernel.primaryPalette.Text,
+            Kernel.primaryPalette.Text,
+            Color.Black, //placeholder
+            Kernel.primaryPalette.Text
+        };
 
         public static void Draw(SVGAIICanvas canvas)
         {
@@ -41,6 +59,7 @@ namespace ReturnOS.Graphical.Deskgets
                 var y = 50;
                 foreach (var content in topMenuLogoButtonContents)
                 {
+                    contentsXY.Add(x, y);
                     content(x, y);
                     y += 20;
                 }
@@ -57,11 +76,25 @@ namespace ReturnOS.Graphical.Deskgets
                 menuOpen = !menuOpen;
                 MouseManager.MouseState = MouseState.None;
             }
+
+            // Check Click for top menu -> logo button -> menu items
+            var itemCount = 0;
+            foreach (var item in contentsXY)
+            {
+                if (mouseEvent.clicked == MouseState.Left &&
+                    mouseEvent.x > item.Key && mouseEvent.x < TTFManager.GetTTFWidth(contentsStr[itemCount], "main", 12) &&
+                    mouseEvent.y > item.Value && mouseEvent.y < 12)
+                {
+                    contentFontColors[itemCount] = Kernel.primaryPalette.Blue;
+                }
+
+                itemCount++;
+            }
         }
 
         public static void DrawAboutButton(int x, int y)
         {
-            Kernel.canvas.DrawStringTTF(Kernel.primaryPalette.Text, "About", "main", 12, new(x, y));
+            Kernel.canvas.DrawStringTTF(contentFontColors[0], "About", "main", 12, new(x, y));
         }
 
         public static void DrawSeparator1(int x, int y)
@@ -71,12 +104,12 @@ namespace ReturnOS.Graphical.Deskgets
 
         public static void DrawShutdownButton(int x, int y)
         {
-            Kernel.canvas.DrawStringTTF(Kernel.primaryPalette.Text, "Shutdown", "main", 12, new(x, y));
+            Kernel.canvas.DrawStringTTF(contentFontColors[1], "Shutdown", "main", 12, new(x, y));
         }
 
         public static void DrawRestartButton(int x, int y)
         {
-            Kernel.canvas.DrawStringTTF(Kernel.primaryPalette.Text, "Restart", "main", 12, new(x, y));
+            Kernel.canvas.DrawStringTTF(contentFontColors[2], "Restart", "main", 12, new(x, y));
         }
 
         public static void DrawSeparator2(int x, int y)
@@ -86,7 +119,7 @@ namespace ReturnOS.Graphical.Deskgets
 
         public static void DrawLogOutButton(int x, int y)
         {
-            Kernel.canvas.DrawStringTTF(Kernel.primaryPalette.Text, "Log Out", "main", 12, new(x, y));
+            Kernel.canvas.DrawStringTTF(contentFontColors[3], "Log Out", "main", 12, new(x, y));
         }
     }
 }
